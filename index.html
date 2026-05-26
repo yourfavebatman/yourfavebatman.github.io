@@ -9,79 +9,141 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #0a0a0a; --bg2: #111111; --bg3: #181818;
-    --line: rgba(255,255,255,0.07); --line2: rgba(255,255,255,0.13);
-    --text: #f0ede6; --muted: #7a7670;
-    --accent: #9b7fe8; --accent2: #b89ff0;
+    --bg: #07070f;
+    --accent: #9b7fe8;
+    --accent2: #b89ff0;
     --green: #4dab7e;
-    --tag-bg: rgba(155,127,232,0.1); --tag-border: rgba(155,127,232,0.25);
+    --text: #f0ede6;
+    --muted: #7a7670;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.09);
+    --glass-hover: rgba(255,255,255,0.07);
+    --tag-bg: rgba(155,127,232,0.12);
+    --tag-border: rgba(155,127,232,0.28);
   }
+
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.7; font-size: 16px; overflow-x: hidden; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(155,127,232,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(77,171,126,0.04) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
   ::selection { background: rgba(155,127,232,0.3); }
 
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--line); }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(7,7,15,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+  }
   .nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
   .nav-links { display: flex; gap: 2rem; }
   .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
 
-  /* LAYOUT */
-  section { padding: 6rem 2.5rem; max-width: 900px; margin: 0 auto; }
-  .divider { width: 100%; height: 1px; background: var(--line); max-width: 900px; margin: 0 auto; }
-  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3rem; display: flex; align-items: center; gap: 0.75rem; }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  section { padding: 6rem 2.5rem; max-width: 920px; margin: 0 auto; }
+  .divider { width: 100%; height: 1px; background: var(--glass-border); max-width: 920px; margin: 0 auto; }
 
-  /* HERO */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 8rem; padding-bottom: 4rem; max-width: 900px; margin: 0 auto; padding-left: 2.5rem; padding-right: 2.5rem; }
-  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding-top: 8rem; padding-bottom: 4rem;
+    max-width: 920px; margin: 0 auto; padding-left: 2.5rem; padding-right: 2.5rem;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
   .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
   h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.08; font-weight: 400; color: var(--text); margin-bottom: 1.25rem; letter-spacing: -0.01em; }
   h1 em { font-style: italic; color: var(--accent); }
-  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem; }
+  .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem; }
   .hero-sub strong { color: var(--text); font-weight: 400; }
   .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 0.7rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
-  .btn-primary { background: var(--accent); color: #0a0a0a; border: 1px solid var(--accent); }
+  .btn { display: inline-block; padding: 0.7rem 1.5rem; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+  .btn-primary { background: var(--accent); color: #07070f; border: 1px solid var(--accent); }
   .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
-  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line2); }
-  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+  .btn-ghost { background: var(--glass); color: var(--muted); border: 1px solid var(--glass-border); backdrop-filter: blur(8px); }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); background: var(--glass-hover); }
 
-  /* WINS */
-  .wins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
-  .win-card { background: var(--bg2); padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
-  .win-number { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
+  .wins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+  .win-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-radius: 10px; padding: 1.5rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .win-card:hover { border-color: rgba(155,127,232,0.3); background: var(--glass-hover); }
+  .win-number { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: var(--accent); line-height: 1; }
   .win-label { font-size: 13px; color: var(--muted); line-height: 1.4; }
 
-  /* SOCIAL PROOF */
-  .proof-intro { font-size: 14px; color: var(--muted); margin-bottom: 2rem; line-height: 1.7; max-width: 580px; }
-  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .proof-card { background: var(--bg2); border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; }
-  .proof-card img { width: 100%; display: block; object-fit: cover; }
-  .proof-caption { padding: 1rem 1.1rem; }
-  .proof-caption-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
-  .proof-caption-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
-  .proof-caption-text strong { color: var(--text); font-weight: 400; }
-
-  /* AMBASSADOR */
-  .amb-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 0.75rem; }
-  .amb-card { background: var(--bg2); padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1.25rem; }
+  .amb-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 0.75rem; }
+  .amb-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .amb-card:hover { border-color: rgba(155,127,232,0.3); }
   .amb-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; margin-top: 0.55rem; flex-shrink: 0; }
   .amb-body { display: flex; flex-direction: column; gap: 0.3rem; }
   .amb-title { font-size: 15px; color: var(--text); font-weight: 400; }
   .amb-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
-  .amb-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; background: rgba(77,171,126,0.1); border: 1px solid rgba(77,171,126,0.25); color: var(--green); margin-top: 0.2rem; width: fit-content; }
+  .amb-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: rgba(77,171,126,0.1); border: 1px solid rgba(77,171,126,0.25); color: var(--green); margin-top: 0.3rem; width: fit-content; text-decoration: none; }
+  .amb-badge:hover { background: rgba(77,171,126,0.18); }
 
-  /* WORK CARDS */
+  .proof-intro { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.7; }
+  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .proof-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .proof-card:hover { border-color: rgba(155,127,232,0.3); transform: translateY(-2px); }
+  .proof-card img { width: 100%; display: block; object-fit: cover; }
+  .proof-caption { padding: 1rem 1.1rem; }
+  .proof-caption-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .proof-caption-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .proof-caption-text strong { color: var(--text); font-weight: 400; }
+
   .pillar-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-  .pillar { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--line2); border-radius: 2px; color: var(--muted); }
-  .work-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
-  .work-card { background: var(--bg2); padding: 1.75rem 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; transition: background 0.2s; text-decoration: none; color: inherit; }
-  .work-card:hover { background: var(--bg3); }
+  .pillar { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--glass-border); border-radius: 20px; color: var(--muted); background: var(--glass); }
+  .work-list { display: flex; flex-direction: column; gap: 10px; }
+  .work-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px; padding: 1.6rem 1.5rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    text-decoration: none; color: inherit;
+  }
+  .work-card:hover { border-color: rgba(155,127,232,0.3); background: var(--glass-hover); transform: translateY(-2px); }
   .work-card-left { display: flex; flex-direction: column; gap: 0.6rem; }
   .work-card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: var(--tag-bg); border: 1px solid var(--tag-border); color: var(--accent); }
+  .tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: var(--tag-bg); border: 1px solid var(--tag-border); color: var(--accent); }
   .tag.green { background: rgba(77,171,126,0.1); border-color: rgba(77,171,126,0.25); color: var(--green); }
   .work-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-weight: 400; color: var(--text); line-height: 1.3; }
   .work-desc { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 600px; }
@@ -89,27 +151,46 @@
   .work-arrow { color: var(--muted); font-size: 1.1rem; margin-top: 0.3rem; transition: color 0.2s, transform 0.2s; flex-shrink: 0; }
   .work-card:hover .work-arrow { color: var(--accent); transform: translate(3px, -3px); }
 
-  /* PHILOSOPHY */
   .philosophy-block { border-left: 2px solid var(--accent); padding: 0.25rem 0 0.25rem 1.75rem; margin: 1.5rem 0; }
   .philosophy-block p { font-size: 1.05rem; color: var(--text); line-height: 1.8; }
-  .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-top: 2rem; }
-  .philo-item { background: var(--bg2); padding: 1.25rem; display: flex; gap: 0.75rem; align-items: flex-start; }
+  .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 2rem; }
+  .philo-item {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px; padding: 1.25rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .philo-item:hover { border-color: rgba(155,127,232,0.3); }
   .philo-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-top: 0.55rem; flex-shrink: 0; }
   .philo-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
   .philo-text strong { color: var(--text); font-weight: 400; }
 
-  /* CONTACT */
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
-  .contact-item { background: var(--bg2); padding: 1.25rem; }
+  .booking-wrap {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-radius: 14px; overflow: hidden;
+  }
+  .booking-top { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--glass-border); }
+  .booking-top h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--text); margin-bottom: 0.5rem; }
+  .booking-top p { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 500px; }
+  .calendly-embed { width: 100%; height: 650px; border: none; display: block; }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .contact-item {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px; padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: rgba(155,127,232,0.3); }
   .contact-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
   .contact-value { font-size: 14px; color: var(--text); text-decoration: none; display: block; }
   .contact-value:hover { color: var(--accent); }
 
-  /* FOOTER */
-  footer { border-top: 1px solid var(--line); padding: 2rem 2.5rem; max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  footer { border-top: 1px solid var(--glass-border); padding: 2rem 2.5rem; max-width: 920px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   footer p { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
 
-  /* ANIM */
   .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
 
@@ -119,6 +200,7 @@
     .philosophy-grid { grid-template-columns: 1fr; }
     .work-card { grid-template-columns: 1fr; } .work-arrow { display: none; }
     .proof-grid { grid-template-columns: 1fr; }
+    .calendly-embed { height: 800px; }
   }
 </style>
 </head>
@@ -130,6 +212,7 @@
     <a href="#wins">Proof</a>
     <a href="#work">Work</a>
     <a href="#philosophy">Philosophy</a>
+    <a href="#book">Book a Call</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -139,11 +222,11 @@
   <div class="hero-eyebrow">Web3 Translator</div>
   <h1>YourFaveBatman.<br><em>Making Web3 make sense.</em></h1>
   <p class="hero-sub">
-    Most projects build in the dark. <strong>Not because the tech is bad</strong> — because no one explained it in a way a real person could follow. I fix that. I write threads, articles, and campaign content that educates first and converts naturally.
+    Most projects build in the dark. <strong>Not because the tech is bad</strong> — because no one explained it in a way a real person could follow. I write threads, articles, and campaign content that educates first and converts naturally.
   </p>
   <div class="hero-cta-row">
     <a href="https://x.com/yourfavebatman" target="_blank" class="btn btn-primary">Find me on X</a>
-    <a href="#work" class="btn btn-ghost">See the work ↓</a>
+    <a href="#book" class="btn btn-ghost">Book a call ↓</a>
   </div>
 </div>
 
@@ -155,32 +238,32 @@
 
   <div class="wins-grid">
     <div class="win-card">
-      <div class="win-number" style="font-size:1.1rem;line-height:1.3;">Contest<br>Winner</div>
-      <div class="win-label">Normalfi · 5th place finish · co-founder DM + partnership talks</div>
+      <div class="win-number" style="font-size:1.1rem;line-height:1.4;">Co-founder<br>Partnership</div>
+      <div class="win-label">Normalfi · Justin Benjamin DMd after 5th place thread finish — opened long-term partnership talks</div>
     </div>
     <div class="win-card">
-      <div class="win-number" style="font-size:1.1rem;line-height:1.3;">Contest<br>Winner</div>
+      <div class="win-number" style="font-size:1.1rem;line-height:1.4;">Contest<br>Winner</div>
       <div class="win-label">Campfire · 1 of 3 winners · January 2026</div>
     </div>
     <div class="win-card">
-      <div class="win-number">97<span style="font-size:1rem;color:var(--muted)">/100</span></div>
-      <div class="win-label">Walrus Protocol article score after revisions</div>
+      <div class="win-number">8</div>
+      <div class="win-label">RTG submissions in 5 days · Arcium Wave 2 · across 5 different formats</div>
     </div>
     <div class="win-card">
-      <div class="win-number">3+</div>
-      <div class="win-label">Years active in Web3 · forex trading background</div>
+      <div class="win-number">12+</div>
+      <div class="win-label">Projects covered · DeFi, AI, Privacy, RWA, DePIN, Payments</div>
     </div>
   </div>
 
   <!-- AMBASSADOR ROLES -->
-  <div style="margin-top: 2.5rem; margin-bottom: 1rem;">
+  <div style="margin-top: 2.5rem;">
     <div class="section-label" style="margin-bottom: 1.5rem;">ambassador roles</div>
     <div class="amb-list">
       <div class="amb-card">
         <div class="amb-dot"></div>
         <div class="amb-body">
           <div class="amb-title">LazAI Network</div>
-          <div class="amb-desc">Content strategist and ambassador for LazAI — an AI + Web3 protocol. Created threads simplifying AI data verification for crypto-curious audiences, built awareness through consistent educational content, and maintained an active presence across community channels.</div>
+          <div class="amb-desc">Content strategist and ambassador for LazAI — an AI + Web3 protocol. Created threads simplifying AI data verification for crypto-curious audiences and maintained active presence across community channels.</div>
           <a href="https://x.com/YourFaveBatman/status/1990404029218787664?s=20" target="_blank" class="amb-badge">View announcement →</a>
         </div>
       </div>
@@ -189,13 +272,13 @@
         <div class="amb-body">
           <div class="amb-title">OSP / Citadel</div>
           <div class="amb-desc">Community ambassador recognized publicly by the core team inside the official ambassador group. Called out by name alongside one other ambassador for leading by example — shoutout pinned in the Telegram group.</div>
-          <div class="amb-badge">Team shoutout below ↓</div>
+          <div class="amb-badge" style="cursor:default;">Team shoutout below ↓</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SOCIAL PROOF SCREENSHOTS -->
+  <!-- RECEIPTS -->
   <div style="margin-top: 2.5rem;">
     <div class="section-label" style="margin-bottom: 1.5rem;">receipts</div>
     <p class="proof-intro">the work speaks. but so do the people it reached.</p>
@@ -204,14 +287,14 @@
         <img src="citadel.png" alt="OSP/Citadel team shoutout in ambassador Telegram group" loading="lazy">
         <div class="proof-caption">
           <div class="proof-caption-label">OSP / Citadel · Ambassador Group</div>
-          <div class="proof-caption-text">Team lead called out <strong>@aystar09</strong> by name in the pinned ambassador channel: <em>"well done, keep being awesome."</em> One of two ambassadors recognized.</div>
+          <div class="proof-caption-text">Team lead called out <strong>@aystar09</strong> by name in the pinned ambassador channel: "well done, keep being awesome." One of two ambassadors recognized.</div>
         </div>
       </div>
       <div class="proof-card">
         <img src="normalfi-dm.jpeg" alt="Normalfi co-founder DM after contest" loading="lazy">
         <div class="proof-caption">
           <div class="proof-caption-label">Normalfi · Co-founder DM</div>
-          <div class="proof-caption-text"><strong>Justin Benjamin</strong>, co-founder of Normal, slid into DMs after the thread placed 5th: <em>"Want to continue our partnership communication… would love to discuss you being a long term partner."</em></div>
+          <div class="proof-caption-text"><strong>Justin Benjamin</strong>, co-founder of Normal, reached out after the thread placed 5th: "Would love to discuss you being a long term partner with us."</div>
         </div>
       </div>
       <div class="proof-card">
@@ -238,8 +321,27 @@
     <span class="pillar">Thread Writing</span>
     <span class="pillar">Long-form Articles</span>
   </div>
-
   <div class="work-list">
+
+    <a href="https://open.substack.com/pub/yourfavebatman/p/the-country-that-keeps-getting-cut?r=511j4d&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true" target="_blank" class="work-card">
+      <div class="work-card-left">
+        <div class="work-card-tags"><span class="tag">Privacy</span><span class="tag">Research</span><span class="tag">Case Study</span><span class="tag green">Article</span></div>
+        <div class="work-title">Arcium / AnonMesh — The country that keeps getting cut off</div>
+        <div class="work-desc">Research-grade case study walking through three documented Nigerian moments — EndSARS protests, the CBN crypto ban, and the 2023 naira redesign crisis — where infrastructure-independent encrypted comms and payments would have changed outcomes. Closes with a specific recommendation for Lagos as AnonMesh's first scaled deployment city.</div>
+        <div class="work-outcome">↳ Submitted to Arcium Wave 2 RTG · AnonMesh "Outside the Box"</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
+
+    <a href="https://x.com/YourFaveBatman/status/2054550220675973475" target="_blank" class="work-card">
+      <div class="work-card-left">
+        <div class="work-card-tags"><span class="tag">Privacy</span><span class="tag">Fiction</span><span class="tag green">Short Story</span></div>
+        <div class="work-title">Arcium — The Cartographer</div>
+        <div class="work-desc">Literary short fiction set in a future where every human transaction, movement, and conversation is mapped onto a public ledger called "The Atlas." A cartographer is hired to find the one man who has never appeared on it. Privacy treated as something sacred, not technical.</div>
+        <div class="work-outcome">↳ Submitted to Arcium Wave 2 RTG · Fiction category</div>
+      </div>
+      <div class="work-arrow">↗</div>
+    </a>
 
     <a href="https://x.com/YourFaveBatman/status/2055711709109559625?s=20" target="_blank" class="work-card">
       <div class="work-card-left">
@@ -276,17 +378,7 @@
         <div class="work-card-tags"><span class="tag">Privacy</span><span class="tag">Storage</span><span class="tag green">Article</span></div>
         <div class="work-title">Walrus Protocol — When the truth is editable</div>
         <div class="work-desc">600+ word article on verifiable data storage using three case studies: the $SQUID rug pull, the BadgerDAO frontend hack, and FTX's ToS violations. The argument: crypto didn't fail because of bad actors — it failed because the truth was editable.</div>
-        <div class="work-outcome">↳ 97/100 post-revision score</div>
-      </div>
-      <div class="work-arrow">↗</div>
-    </a>
-
-    <a href="https://x.com/YourFaveBatman/status/2048431139669307613?s=20" target="_blank" class="work-card">
-      <div class="work-card-left">
-        <div class="work-card-tags"><span class="tag">Health</span><span class="tag">DeFi</span><span class="tag green">Thread</span></div>
-        <div class="work-title">Yield Bay — When your health data starts earning</div>
-        <div class="work-desc">Educational thread on Yield Bay's health protocol — a system where users monetize personal health data on-chain. Broke down the mechanism that turns biometric and wellness data into yield-generating assets, and why the privacy architecture matters before the earning potential does.</div>
-        <div class="work-outcome">↳ Health x DeFi education thread</div>
+        <div class="work-outcome">↳ Long-form data verification piece</div>
       </div>
       <div class="work-arrow">↗</div>
     </a>
@@ -315,7 +407,7 @@
       <div class="work-card-left">
         <div class="work-card-tags"><span class="tag">AI</span><span class="tag">DeFi</span><span class="tag green">Article</span></div>
         <div class="work-title">Mantle — When AI meets on-chain content strategy</div>
-        <div class="work-desc">Article documenting a 4-step AI-assisted content workflow using the Normalfi 5th place finish as proof of concept. Anchored by real losses (Wakanda Inu, TRUMP coin) and refined through a multi-AI critique loop before submission.</div>
+        <div class="work-desc">Article documenting a 4-step AI-assisted content workflow using the Normalfi 5th place finish as proof of concept. Anchored by real losses and refined through a multi-AI critique loop before submission.</div>
         <div class="work-outcome">↳ Mantle "When AI Meets Mantle" bounty entry</div>
       </div>
       <div class="work-arrow">↗</div>
@@ -325,7 +417,7 @@
       <div class="work-card-left">
         <div class="work-card-tags"><span class="tag">AI</span><span class="tag">Testing</span><span class="tag green">Thread</span></div>
         <div class="work-title">Supermission — 16 tweets of real bugs</div>
-        <div class="work-desc">Stress-test and content bounty for a platform running four AI agents: ORACLE, DELPHI, HYPERION, and SECURO. Documented real bugs found during firsthand testing across 16 tweets. No secondhand descriptions — every observation came from actually using the product.</div>
+        <div class="work-desc">Stress-test and content bounty for a platform running four AI agents: ORACLE, DELPHI, HYPERION, and SECURO. Documented real bugs found during firsthand testing across 16 tweets. Every observation came from actually using the product.</div>
         <div class="work-outcome">↳ Bounty submission — firsthand product stress-test</div>
       </div>
       <div class="work-arrow">↗</div>
@@ -335,28 +427,8 @@
       <div class="work-card-left">
         <div class="work-card-tags"><span class="tag">ReFi</span><span class="tag">Community</span><span class="tag green">X Post</span><span class="tag green">Contest Win</span></div>
         <div class="work-title">Campfire — Clean energy you can actually own a piece of</div>
-        <div class="work-desc">69-word X post explaining how Campfire lets communities pool funds into real renewable energy projects on-chain — so money earns while it supports solar and clean power. Made shared ownership and on-chain transparency feel tangible in under 70 words. Placed as 1 of 3 winners.</div>
+        <div class="work-desc">69-word X post explaining how Campfire lets communities pool funds into real renewable energy projects on-chain. Made shared ownership and on-chain transparency feel tangible in under 70 words. Placed as 1 of 3 winners.</div>
         <div class="work-outcome">↳ 1 of 3 winners · January 2026</div>
-      </div>
-      <div class="work-arrow">↗</div>
-    </a>
-
-    <a href="https://x.com/YourFaveBatman/status/2035705824530538935?s=20" target="_blank" class="work-card">
-      <div class="work-card-left">
-        <div class="work-card-tags"><span class="tag">DePIN</span><span class="tag green">Thread</span></div>
-        <div class="work-title">FliteGrid — DePIN drone tracking on the ground</div>
-        <div class="work-desc">Educational thread on FliteGrid's decentralized drone tracking infrastructure. Broke down the DePIN model for a non-technical audience, focused on what physical infrastructure on-chain actually means in practice.</div>
-        <div class="work-outcome">↳ Thread contest entry</div>
-      </div>
-      <div class="work-arrow">↗</div>
-    </a>
-
-    <a href="https://x.com/YourFaveBatman/status/2013317341023474028?s=20" target="_blank" class="work-card">
-      <div class="work-card-left">
-        <div class="work-card-tags"><span class="tag">DeFi</span><span class="tag">Solana</span><span class="tag green">Thread</span></div>
-        <div class="work-title">GotSOL — Making Solana DeFi accessible</div>
-        <div class="work-desc">Educational thread breaking down GotSOL's approach to Solana DeFi for newcomers. Focused on simplifying the entry point and making the ecosystem feel less intimidating to crypto-curious readers.</div>
-        <div class="work-outcome">↳ Community education thread</div>
       </div>
       <div class="work-arrow">↗</div>
     </a>
@@ -407,11 +479,29 @@
 
 <div class="divider"></div>
 
+<!-- BOOK A CALL -->
+<section id="book" class="fade-in">
+  <div class="section-label">book a call</div>
+  <div class="booking-wrap">
+    <div class="booking-top">
+      <h2>Let's talk about your project.</h2>
+      <p>if you're building something in Web3 and need content that actually explains it — pick a time below. no pitch decks required, just a conversation.</p>
+    </div>
+    <iframe
+      class="calendly-embed"
+      src="https://calendly.com/yourfavebatman"
+      title="Schedule a call with YourFaveBatman">
+    </iframe>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- CONTACT -->
 <section id="contact" class="fade-in">
-  <div class="section-label">work with me</div>
+  <div class="section-label">contact</div>
   <p style="font-size:1.05rem;color:var(--muted);max-width:520px;margin-bottom:2rem;line-height:1.8;">
-    available for ambassador roles, content partnerships, bounty campaigns, and community building. if you're building something real and need someone to explain it clearly — let's talk.
+    prefer to reach out directly? all channels below. if it's about a project, Telegram is fastest.
   </p>
   <div class="contact-grid">
     <div class="contact-item">
@@ -425,10 +515,6 @@
     <div class="contact-item">
       <div class="contact-label">Telegram</div>
       <a href="https://t.me/yourfavebatman" target="_blank" class="contact-value">@yourfavebatman</a>
-    </div>
-    <div class="contact-item">
-      <div class="contact-label">Discord</div>
-      <span class="contact-value">@yourfavebatman</span>
     </div>
   </div>
 </section>
